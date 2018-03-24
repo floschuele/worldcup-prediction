@@ -8,10 +8,10 @@ Easy to use
 2. Start script using "python3 cup.py"
 2. Simulation will be performed and results are printed in console
 
-
 Parameters to set
 ------------------
-Change parameter "self.model_id" to the model you want to test
+1. Change parameter "self.model_id" to the model you want to test
+2. Prameter "self.groups" is already filled with groups and teams of Worldcup 2018
 
 Implemented Models
 -------------------
