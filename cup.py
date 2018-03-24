@@ -23,7 +23,7 @@ debug = False
 
 class tournament:
     """
-    Simulates a soccer tournement
+    Simulates a soccer tournament
 
     """
 
@@ -38,7 +38,7 @@ class tournament:
         ########################################################################
         
         # Define which model is used for simulation
-        # Available: "random", "HomeAlwaysWins", 
+        # Available: "random", "HomeAlwaysWins"
         self.model_id = "random"
 
         # Define groups and teams
