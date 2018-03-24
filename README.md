@@ -18,3 +18,9 @@ Implemented Models
 1. Random results with up to 5 goals per team: self.model_id = "random"
 2. Home always wins: self.model_id = "HomeAlwaysWins"
 
+Ideas for further models
+-----------------------
+1. Deep learning for match prediction, train model with results of previous matches
+2. Use bet odds, e.g. bwin, betfair
+3. Use data from world ranking list
+4. whatever...
