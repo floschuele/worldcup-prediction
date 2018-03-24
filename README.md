@@ -15,6 +15,6 @@ Change parameter "self.model_id" to the model you want to test
 
 Implemented Models
 -------------------
-1. Random results with up to 5 goals per team --> self.model_id = "random"
-2. Home always wins --> self.model_id = "HomeAlwaysWins"
+1. Random results with up to 5 goals per team: self.model_id = "random"
+2. Home always wins: self.model_id = "HomeAlwaysWins"
 
