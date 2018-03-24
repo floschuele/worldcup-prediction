@@ -15,7 +15,9 @@ TODOS AND FIXMES:
 """
 import pprint
 import time
+import datetime
 import random
+from terminaltables import AsciiTable
 
 
 pprint = pprint.pprint
@@ -56,7 +58,7 @@ class tournament:
 
         # Placeholders for results
         self.result_preliminary = {}  # create dict
-        for group in self.groups:
+        for group in sorted(self.groups):
             self.result_preliminary[group] = {}  # create subdict
             for team in self.groups[group]:
                 self.result_preliminary[group][team] = {"Points": 0,
@@ -200,7 +202,7 @@ class tournament:
         # 1. Perform matches and update points in results table
 
         # Loop throug all groups
-        for group in self.groups:
+        for group in sorted(self.groups):
 
             # Loop through matches 0-1, 0-2, 0-3
             for i in range(3):
@@ -257,7 +259,7 @@ class tournament:
         # 2. Ranking
 
         # Loop through all groups
-        for group in self.groups:
+        for group in sorted(self.groups):
             
             # rank teams, but only first and second places are needed
             ranking_team = []
@@ -457,27 +459,226 @@ class tournament:
         elif self.matches[self.match_id]["Result"] == "AwayWin":
             self.result_final_3rd = self.matches[self.match_id]["AwayTeam"]
 
-    def print_preliminary_table(self):
+    def print_preliminary(self):
         """
         Prints pretty table of preliminary round results
 
         """
-        pass
+        matchcount = 0
+
+        for group in sorted(self.groups):
+            title = "Group: " + group
+
+            team = []
+            points = []
+            goals = []
+            for i in range(4):
+                teamname = self.result_preliminary[group]["Ranking"][i]
+                team.append(teamname)
+                points.append(self.result_preliminary[group][teamname]["Points"])
+                goals.append(self.result_preliminary[group][teamname]["Goals"])
+
+            table_data = [
+                            ["Rank", "Team", "Points", "Goal Ratio"],
+                            [" 1 ", team[0], points[0], goals[0]],
+                            [" 2 ", team[1], points[1], goals[1]],
+                            [" 3 ", team[2], points[2], goals[2]],
+                            [" 4 ", team[3], points[3], goals[3]]
+                         ]
+            # Print table
+            table = AsciiTable(table_data, title)
+            print(table.table)
+            print("\n")
+
+            # Matches
+            title = "Group " + group + " Matches"
+
+            no = []
+            home = []
+            away = []
+            homegoals = []
+            awaygoals = []
+
+            for i in range(6):
+                no.append(matchcount + 1)
+                home.append(self.matches[matchcount]["HomeTeam"])
+                away.append(self.matches[matchcount]["AwayTeam"])
+                homegoals.append(self.matches[matchcount]["HomeGoals"])
+                awaygoals.append(self.matches[matchcount]["AwayGoals"])
+                matchcount += 1
+
+            table_data = [
+                            ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                            [no[0], home[0], away[0], homegoals[0], awaygoals[0]],
+                            [no[1], home[1], away[1], homegoals[1], awaygoals[1]],
+                            [no[2], home[2], away[2], homegoals[2], awaygoals[2]],
+                            [no[3], home[3], away[3], homegoals[3], awaygoals[3]],
+                            [no[4], home[4], away[4], homegoals[4], awaygoals[4]],
+                            [no[5], home[5], away[5], homegoals[5], awaygoals[5]]
+                         ]
+
+            # Print table
+            table = AsciiTable(table_data, title)
+            print(table.table)
+            print("\n")
 
     def print_knockout(self):
         """
         Prints Chart of matches of knockout round
 
         """
-        pass
+        matchcount = 48
 
-    def print_matches(self):
+        # Print round of 16 results
+        title = "Round of 16"
+
+        no = []
+        home = []
+        away = []
+        homegoals = []
+        awaygoals = []
+
+        for i in range(8):
+            no.append(matchcount + 1)
+            home.append(self.matches[matchcount]["HomeTeam"])
+            away.append(self.matches[matchcount]["AwayTeam"])
+            homegoals.append(self.matches[matchcount]["HomeGoals"])
+            awaygoals.append(self.matches[matchcount]["AwayGoals"])
+            matchcount += 1
+
+        table_data = [
+                        ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                        [no[0], home[0], away[0], homegoals[0], awaygoals[0]],
+                        [no[1], home[1], away[1], homegoals[1], awaygoals[1]],
+                        [no[2], home[2], away[2], homegoals[2], awaygoals[2]],
+                        [no[3], home[3], away[3], homegoals[3], awaygoals[3]],
+                        [no[4], home[4], away[4], homegoals[4], awaygoals[4]],
+                        [no[5], home[5], away[5], homegoals[5], awaygoals[5]],
+                        [no[6], home[6], away[6], homegoals[6], awaygoals[6]],
+                        [no[7], home[7], away[7], homegoals[7], awaygoals[7]],
+                     ]
+
+        # Print table
+        table = AsciiTable(table_data, title)
+        print(table.table)
+        print("\n")
+
+        # Print quarter final results
+        title = "Quarter Finals"
+
+        no = []
+        home = []
+        away = []
+        homegoals = []
+        awaygoals = []
+
+        for i in range(4):
+            no.append(matchcount + 1)
+            home.append(self.matches[matchcount]["HomeTeam"])
+            away.append(self.matches[matchcount]["AwayTeam"])
+            homegoals.append(self.matches[matchcount]["HomeGoals"])
+            awaygoals.append(self.matches[matchcount]["AwayGoals"])
+            matchcount += 1
+
+        table_data = [
+                        ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                        [no[0], home[0], away[0], homegoals[0], awaygoals[0]],
+                        [no[1], home[1], away[1], homegoals[1], awaygoals[1]],
+                        [no[2], home[2], away[2], homegoals[2], awaygoals[2]],
+                        [no[3], home[3], away[3], homegoals[3], awaygoals[3]],
+                     ]
+
+        # Print table
+        table = AsciiTable(table_data, title)
+        print(table.table)
+        print("\n")
+
+        # Print semi final results
+        title = "Semi Finals"
+
+        no = []
+        home = []
+        away = []
+        homegoals = []
+        awaygoals = []
+
+        for i in range(2):
+            no.append(matchcount + 1)
+            home.append(self.matches[matchcount]["HomeTeam"])
+            away.append(self.matches[matchcount]["AwayTeam"])
+            homegoals.append(self.matches[matchcount]["HomeGoals"])
+            awaygoals.append(self.matches[matchcount]["AwayGoals"])
+            matchcount += 1
+
+        table_data = [
+                        ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                        [no[0], home[0], away[0], homegoals[0], awaygoals[0]],
+                        [no[1], home[1], away[1], homegoals[1], awaygoals[1]],
+                     ]
+
+        # Print table
+        table = AsciiTable(table_data, title)
+        print(table.table)
+        print("\n")
+
+        # Print 3rd final
+        title = "3rd Final"
+
+
+        no = matchcount + 1
+        home = self.matches[matchcount]["HomeTeam"]
+        away = self.matches[matchcount]["AwayTeam"]
+        homegoals = self.matches[matchcount]["HomeGoals"]
+        awaygoals = self.matches[matchcount]["AwayGoals"]
+        matchcount += 1
+
+        table_data = [
+                        ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                        [no, home, away, homegoals, awaygoals]
+
+                     ]
+
+        # Print table
+        table = AsciiTable(table_data, title)
+        print(table.table)
+        print("\n")
+
+        # Print final
+        title = "Final"
+
+
+        no = matchcount + 1
+        home = self.matches[matchcount]["HomeTeam"]
+        away = self.matches[matchcount]["AwayTeam"]
+        homegoals = self.matches[matchcount]["HomeGoals"]
+        awaygoals = self.matches[matchcount]["AwayGoals"]
+        matchcount += 1
+
+        table_data = [
+                        ["Match No.", "HomeTeam", "AwayTeam", "HomeGoals", "AwayGoals"],
+                        [no, home, away, homegoals, awaygoals]
+
+                     ]
+
+        # Print table
+        table = AsciiTable(table_data, title)
+        print(table.table)
+
+    def save_to_csv(self):
         """
-        Print good looking match results
+        Saves results of matches in csv file
 
         """
-        pass
+        filename = datetime.datetime.now().strftime("%Y_%m_%d-%H-%M")
+        file = open(filename + ".csv", "w")
 
+        file.write("Match_id, HomeTeam, AwayTeam, HomeGoals, AwayGoals, Stage\n")
+        for i in range(len(self.matches)):
+            file.write(str(i) + ", " + self.matches[i]["HomeTeam"] + "," + self.matches[i]["AwayTeam"] +
+                       ", " + str(self.matches[i]["HomeGoals"]) + ", " + str(self.matches[i]["HomeGoals"]) + 
+                        ", " + self.matches[i]["Stage"] + "\n")
+
+        file.close()
 
 if __name__ == "__main__":
     """
@@ -496,20 +697,18 @@ if __name__ == "__main__":
     worldcup = tournament()
 
     # Preliminary Round
-    print("Simulating preliminary round...")
+    print("Simulating preliminary round...\n")
     worldcup.preliminary()
+    worldcup.print_preliminary()
     print("Done...\n")
 
     # Knockout
-    print("Simulating knockout round...")
+    print("Simulating knockout round...\n")
     worldcup.knockout()
-    print("Done...\n")
+    worldcup.print_knockout()
+    print("\nDone...")
 
     end = time.time()
-
-    # PPrint all matches
-    print("All Matches: ")
-    #pprint(worldcup.matches)
 
     print("\nSimulation finished...\n")
     print("Finished in %s ms...\n" % str(round((end-start)*1000, 5)))
@@ -518,3 +717,6 @@ if __name__ == "__main__":
         print("WORLD CHAMPION 2018: Prediction FAILED")
     else:
         print("WORLD CHAMPION 2018: %s" % worldcup.result_final)
+
+    if input("Save data? (y/n) ") == "y":
+        worldcup.save_to_csv()
