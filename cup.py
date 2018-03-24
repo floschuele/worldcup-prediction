@@ -1,9 +1,7 @@
 """
 03/2018
 Florian Schüle <florianschuele@gmail.com>
-World Cup simulator and predction of matches and winner
-Framework for model testing
-
+Soccer Worldcup Simulation Framework for Prediction
 
 TODOS AND FIXMES:
 - what happens in preliminary round when points and goals are equal?
