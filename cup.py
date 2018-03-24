@@ -10,7 +10,6 @@ TODOS AND FIXMES:
 - Draw must not appear in KO round - must be checked in model!
 
 - Implement more Models
-- Implement visual print of results
 
 """
 import pprint
